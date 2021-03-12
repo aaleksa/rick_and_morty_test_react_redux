@@ -12,7 +12,7 @@ const apiFilter = {
 };
 
 async function getList() {
-  // console.log('get list call json');
+  console.log('get list call json');
 
   let json = {};
   const url = `${apiEndpoints.characters}`;
@@ -35,6 +35,7 @@ async function getList() {
 }
 
 async function getListFilter() {
+  console.log('getListFilter');
   let json = {};
   const url = `${apiFilter.characters}/`;
   const response = await fetch(url, {
@@ -48,6 +49,8 @@ async function getListFilter() {
     // если HTTP-статус в диапазоне 200-299
     // получаем тело ответа (см. про этот метод ниже)
     json = await response.json();
+    console.log('getListFilter', json);
+
   } else {
     alert("Ошибка HTTP: " + response.status);
   }

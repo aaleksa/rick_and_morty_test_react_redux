@@ -329,7 +329,9 @@ const characterListExample = [{
 
 const initialState = {
   countPages: infoExample,
-  characterList: characterListExample,
+  // characterList: characterListExample,
+  characterList: [],
+  listInfo: {},
   isRequestingCharacterList: false,
   isIncrementing: false,
   isDecrementing: false
@@ -345,13 +347,13 @@ export default (state = initialState, action) => {
       };
 
     case CHARACTER_LIST:
-      console.log('CHARACTER_LIST',action.payload,)
+      console.log('CHARACTER_LIST', action.payload)
       return {
         ...state,
-        characterList: action.payload,
+        characterList: action.payload.results,
+        listInfo: action.payload.info,
         isRequestingCharacterList: !state.isRequestingCharacterList,
       };
-
 
     default:
       return state;
@@ -359,16 +361,22 @@ export default (state = initialState, action) => {
 }
 
 export const loadCharacterListAsync = () => {
+  console.log('loadCharacterListAsync');
+
   return async (dispatch) => {
+    console.log('loadCharacterListAsync 2');
     dispatch({
       type: CHARACTER_LIST_REQUESTED,
     })
+    console.log('loadCharacterListAsync 3');
 
     const list = await api.getList();
+    console.log('loadCharacterListAsync 4');
     dispatch({
       type: CHARACTER_LIST,
       payload: list,
     })
+    console.log('loadCharacterListAsync 5');
   };
 };
 export const loadCharacterListAsyncFilter = (filters) => {

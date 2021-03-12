@@ -13,6 +13,11 @@ const filtersArray = [];
 
 
 class Characters extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   // const arrayLen = new Array(props.countPages.info.pages);
   // const arrayPages = function() {
   //   let array = [];
@@ -31,6 +36,10 @@ class Characters extends React.Component {
   //   </ul>
   // )
   // console.log('listPages',listPages)
+
+  async componentDidMount() {
+    this.props.loadCharacterListAsync();
+  }
 
   handleInputChange(event) {
     // const dispatch = useDispatch();
@@ -56,6 +65,7 @@ class Characters extends React.Component {
       filtersArray.push(filters);
 
     }
+    loadCharacterListAsyncFilter(filtersArray);
     // dispatch(loadCharacterListAsyncFilter(filtersArray));
     // this.props.loadCharacterListAsyncFilter(filtersArray);
 
@@ -119,6 +129,7 @@ function mapStateToProps(state) {
     countPages: state.counter.countPages,
     isRequestingCharacterList: state.counter.isRequestingCharacterList,
     characterList: state.counter.characterList,
+    listInfo: state.counter.listInfo,
   };
 }
 

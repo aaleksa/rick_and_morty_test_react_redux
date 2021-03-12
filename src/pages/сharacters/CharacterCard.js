@@ -4,11 +4,12 @@ import './index.css';
 
 const CharacterCard = (props) => {
   // const characterList = [1, 2, 3, 4, 5]
-  console.log('CharacterCard characterList',props.characterList.results)
+  console.log('CharacterCard characterList',props.characterList);
+  console.log('CharacterCard characterList >>>>>> ',props.characterList.results);
 
   const listItems = (
     <ul className={'container-card'}>
-    {props.characterList.map((characterList) => (
+    {props.characterList && props.characterList.map((characterList) => (
       <li key={characterList.id} className={'item-card'}>
           <h2>{characterList.name}</h2>
           <img src={characterList.image}/>
