@@ -1,0 +1,44 @@
+.container-characters {
+  display: flex;
+  flex-direction: column;
+  background-color: wheat;
+  align-items: center;
+color: cornflowerblue;
+}
+.container-group {
+  width: 50%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+
+}
+.container-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.checkbox {
+  width: 30px;
+  height: 30px;
+  margin: 20px;
+}
+.container-main {
+  display: flex;
+  flex-direction: row;
+
+}
+.container-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.item-card {
+  background-color: cornsilk;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
