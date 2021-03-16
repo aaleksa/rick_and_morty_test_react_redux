@@ -1,19 +1,11 @@
-
-const API_URL = 'https://rickandmortyapi.com/api'
+const API_URL = 'https://rickandmortyapi.com/api';
 const apiEndpoints = {
   "characters": "https://rickandmortyapi.com/api/character",
   "locations": "https://rickandmortyapi.com/api/location",
   "episodes": "https://rickandmortyapi.com/api/episode",
 };
-const apiFilter = {
-  "characters": "https://rickandmortyapi.com/api/character/",
-  "locations": "https://rickandmortyapi.com/api/location",
-  "episodes": "https://rickandmortyapi.com/api/episode",
-};
 
 async function getList() {
-  console.log('get list call json');
-
   let json = {};
   const url = `${apiEndpoints.characters}`;
   const response = await fetch(url, {
@@ -22,10 +14,7 @@ async function getList() {
       Accept: 'application/json'
     }
   });
-
   if (response.ok) {
-    // если HTTP-статус в диапазоне 200-299
-    // получаем тело ответа (см. про этот метод ниже)
     json = await response.json();
   } else {
     alert("Ошибка HTTP: " + response.status);
@@ -34,10 +23,10 @@ async function getList() {
   return json;
 }
 
-async function getListFilter() {
-  console.log('getListFilter');
+async function getListSelectedPage(event) {
+  const numberPage = event.target.textContent;
   let json = {};
-  const url = `${apiFilter.characters}/`;
+  const url = `${apiEndpoints.characters}/?page=${numberPage}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -46,11 +35,7 @@ async function getListFilter() {
   });
 
   if (response.ok) {
-    // если HTTP-статус в диапазоне 200-299
-    // получаем тело ответа (см. про этот метод ниже)
     json = await response.json();
-    console.log('getListFilter', json);
-
   } else {
     alert("Ошибка HTTP: " + response.status);
   }
@@ -58,7 +43,28 @@ async function getListFilter() {
   return json;
 }
 
+async function getListFilter(filter) {
+  console.log('getListFilter',filter)
+  // const filtersS = filter;
+  let json = {};
+  const url = `${apiEndpoints.characters}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
+    }
+  });
+  if (response.ok) {
+    json = await response.json();
+
+  } else {
+    alert("Ошибка HTTP: " + response.status);
+  }
+  return json;
+}
+
 export default {
   getList,
   getListFilter,
+  getListSelectedPage
 }

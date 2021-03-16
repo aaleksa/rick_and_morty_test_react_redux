@@ -42,3 +42,29 @@ color: cornflowerblue;
   align-items: center;
   padding: 10px;
 }
+.item-card-img {
+  max-width: 90%;
+}
+.container-main-pagination {
+  display: flex;
+  flex-direction: row;
+  max-width: 60%;
+}
+.container-pagination {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+}
+.item-pagination {
+  cursor: pointer;
+}
+.item-pagination-button {
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  background-color: cornsilk;
+}
