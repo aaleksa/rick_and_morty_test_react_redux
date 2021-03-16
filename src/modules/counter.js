@@ -29,6 +29,8 @@ export default (state = initialState, action) => {
         }
         arrayPages.push(itemNumberPage)
       }
+      console.log('CHARACTER_LIST',action.payload.info)
+
       return {
         ...state,
         characterList: action.payload.results,

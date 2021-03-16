@@ -44,10 +44,17 @@ async function getListSelectedPage(event) {
 }
 
 async function getListFilter(filter) {
-  console.log('getListFilter',filter)
-  // const filtersS = filter;
+  // console.log('getListFilter',filter)
+  const filtersString = filter.map((item) => {
+    const type = Object.keys(item);
+    const value =  item[type];
+    const str = type + '=' + value;
+    return str;
+  });
+  this.filtersString = filtersString.join('&');
+  console.log('filtersString',this.filtersString)
   let json = {};
-  const url = `${apiEndpoints.characters}`;
+  const url = `${apiEndpoints.characters}?${this.filtersString}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {

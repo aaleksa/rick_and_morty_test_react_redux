@@ -10,12 +10,13 @@ import {
 } from '../../modules/counter';
 
 const filtersArray = [];
-const numberPage = 1;
+// const numberPage = 1;
 
 class Characters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
   async componentDidMount() {
     this.props.loadCharacterListAsync();
@@ -62,6 +63,14 @@ class Characters extends React.Component {
           <div className={'container-checkbox'} onClick={this.handleInputChange}>
             <input type="checkbox" className={'checkbox'} id={'Female'} name={'gender'}/>
             <label htmlFor={'Female'}>Female</label>
+          </div>
+          <div className={'container-checkbox'} onClick={this.handleInputChange}>
+            <input type="checkbox" className={'checkbox'} id={'genderless'} name={'gender'}/>
+            <label htmlFor={'genderless'}>Genderless</label>
+          </div>
+          <div className={'container-checkbox'} onClick={this.handleInputChange}>
+            <input type="checkbox" className={'checkbox'} id={'unknown'} name={'gender'}/>
+            <label htmlFor={'unknown'}>Unknown</label>
           </div>
         </form>
         <form className={'container-group'} id="status_form">

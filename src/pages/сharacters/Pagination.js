@@ -10,7 +10,7 @@ const Pagination = (props) => {
   const listItems = (
     <div className={'container-pagination'}>
       {props.arrayPages && props.arrayPages.map((arrayPages) => (
-        <div key={arrayPages.id} className={'item-pagination'}>
+        <div key={arrayPages.id+'0'} className={'item-pagination'}>
           <button className={'item-pagination-button'}
                   onClick={props.loadCharacterListAsyncSelectedPage}>
             {arrayPages.value}
