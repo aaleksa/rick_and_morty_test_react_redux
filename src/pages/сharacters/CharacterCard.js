@@ -97,7 +97,8 @@ class CharacterCard extends React.Component {
     } else {
       console.log('newPressedCardValue === undefined  FALSE FALSE FALSE FALSE ');
       this.setState({
-        pressedCard: cardData,
+        pressedCard: newPressedCardValue,
+        // pressedCard: cardData,
         showPopupFullCard: true,
       });
 
