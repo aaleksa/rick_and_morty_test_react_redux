@@ -7,6 +7,11 @@ import {loadCharacterMultipleListAsync} from '../../modules/counter';
 
 const Pagination = (props) => {
   function selectedPage(event) {
+    // let id = event.target.parentElement.id;
+    // if(id = 2) {
+    //
+    // }
+    //fffffffff////
     let id = event.target.parentElement.id;
     console.log('event',event,'id',id)
     let arrayCard = [];
@@ -46,6 +51,7 @@ const Pagination = (props) => {
 function mapStateToProps(state) {
   return {
     arrayPages: state.counter.arrayPages,
+
   };
 }
 

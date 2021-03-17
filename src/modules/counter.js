@@ -32,6 +32,7 @@ export default (state = initialState, action) => {
         }
         arrayPagesFilter.push(itemNumberPage)
       }
+
       return {
         ...state,
         arrayPages: arrayPagesFilter,
@@ -62,7 +63,7 @@ export default (state = initialState, action) => {
     case CHARACTER_INFO:
       const arrayPages = [];
       const arrayLen = action.payload.info.pages;
-      for (let i = 1; i <= arrayLen*2; i++) {
+      for (let i = 1; i <= arrayLen * 2; i++) {
         const itemNumberPage = {
           id: i,
           value: i
@@ -111,7 +112,7 @@ export const loadCharacterMultipleListAsync = (arrayCard) => {
       type: CHARACTER_LIST_REQUESTED,
     })
     const list = await api.getMultipleList(arrayCard);
-    console.log('loadCharacterMultipleListAsync respons',list)
+    console.log('loadCharacterMultipleListAsync respons', list)
     dispatch({
       type: CHARACTER_LIST,
       payload: list,
@@ -119,18 +120,18 @@ export const loadCharacterMultipleListAsync = (arrayCard) => {
   };
 };
 
-// export const loadCharacterListAsyncSelectedPage = (numberPage) => {
-//   return async (dispatch) => {
-//     dispatch({
-//       type: CHARACTER_LIST_REQUESTED,
-//     })
-//     const list = await api.getListSelectedPage(numberPage);
-//     dispatch({
-//       type: CHARACTER_LIST,
-//       payload: list,
-//     })
-//   };
-// };
+export const loadCharacterListAsyncSelectedPage = (numberPage) => {
+  return async (dispatch) => {
+    dispatch({
+      type: CHARACTER_LIST_REQUESTED,
+    })
+    const list = await api.getListSelectedPage(numberPage);
+    dispatch({
+      type: CHARACTER_LIST,
+      payload: list,
+    })
+  };
+};
 
 export const loadCharacterListAsyncFilter = (filters) => {
   return async (dispatch) => {
@@ -138,7 +139,7 @@ export const loadCharacterListAsyncFilter = (filters) => {
       type: CHARACTER_LIST_REQUESTED_FILTER,
     })
     const list = await api.getListFilter(filters);
-    console.log('loadCharacterListAsyncFilter list',list)
+    console.log('loadCharacterListAsyncFilter list', list)
     dispatch({
       type: CHARACTER_LIST_FILTER,
       payload: list,

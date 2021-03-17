@@ -44,6 +44,7 @@ async function getMultipleList(arrayCard) {
 
 async function getListSelectedPage(event) {
   const numberPage = event.target.textContent;
+
   let json = {};
   const url = `${apiEndpoints.characters}/?page=${numberPage}`;
   const response = await fetch(url, {
@@ -63,17 +64,10 @@ async function getListSelectedPage(event) {
 }
 
 async function getListFilter(filter) {
-  // console.log('getListFilter',filter)
-  const filtersString = filter.map((item) => {
-    const type = Object.keys(item);
-    const value =  item[type];
-    const str = type + '=' + value;
-    return str;
-  });
-  this.filtersString = filtersString.join('&');
-  console.log('filtersString',this.filtersString)
+  console.log('getListFilter',filter)
+
   let json = {};
-  const url = `${apiEndpoints.characters}/?${this.filtersString}`;
+  const url = `${apiEndpoints.characters}/?${filter}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {
