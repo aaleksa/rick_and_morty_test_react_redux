@@ -2,9 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './index.css';
 
-// let pressedCard = {};
 class CharacterCard extends React.Component {
-  // console.log('showPopupFullCard', showPopupFullCard)
   constructor(props) {
     super(props);
     this.state = {
@@ -16,101 +14,31 @@ class CharacterCard extends React.Component {
   }
 
   showFullCard(event) {
-    // const prevPressedCard = document.getElementsByClassName('pressedElement');
-    //  if (prevPressedCard.length > 0) {
-    //    prevPressedCard[0].classList.remove('pressedElement')
-    //  }
-    // document.getElementById(event.target.parentElement.id).classList.add('pressedElement');
-    const id = event.target.parentElement.id;
-    console.log('id', id, 'typeof id', typeof id);
-    console.log('id', id, 'typeof id', typeof id);
-    const newPressedCardValue = this.props.characterList.find((characterList) => {
-      console.log('characterList.id', id, 'typeof characterList.id', typeof characterList.id);
 
+    const id = event.target.parentElement.id;
+    const newPressedCardValue = this.props.characterList.find((characterList) => {
       if (id == characterList.id) {
         return characterList;
       }
       return undefined;
     });
-    const cardData = {
-      "id": 3,
-      "name": "Summer Smith",
-      "status": "Alive",
-      "species": "Human",
-      "type": "",
-      "gender": "Female",
-      "origin": {
-      "name": "Earth (Replacement Dimension)",
-        "url": "https://rickandmortyapi.com/api/location/20"
-    },
-      "location": {
-      "name": "Earth (Replacement Dimension)",
-        "url": "https://rickandmortyapi.com/api/location/20"
-    },
-      "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-      "episode": [
-      "https://rickandmortyapi.com/api/episode/6",
-      "https://rickandmortyapi.com/api/episode/7",
-      "https://rickandmortyapi.com/api/episode/8",
-      "https://rickandmortyapi.com/api/episode/9",
-      "https://rickandmortyapi.com/api/episode/10",
-      "https://rickandmortyapi.com/api/episode/11",
-      "https://rickandmortyapi.com/api/episode/12",
-      "https://rickandmortyapi.com/api/episode/14",
-      "https://rickandmortyapi.com/api/episode/15",
-      "https://rickandmortyapi.com/api/episode/16",
-      "https://rickandmortyapi.com/api/episode/17",
-      "https://rickandmortyapi.com/api/episode/18",
-      "https://rickandmortyapi.com/api/episode/19",
-      "https://rickandmortyapi.com/api/episode/20",
-      "https://rickandmortyapi.com/api/episode/21",
-      "https://rickandmortyapi.com/api/episode/22",
-      "https://rickandmortyapi.com/api/episode/23",
-      "https://rickandmortyapi.com/api/episode/24",
-      "https://rickandmortyapi.com/api/episode/25",
-      "https://rickandmortyapi.com/api/episode/26",
-      "https://rickandmortyapi.com/api/episode/27",
-      "https://rickandmortyapi.com/api/episode/29",
-      "https://rickandmortyapi.com/api/episode/30",
-      "https://rickandmortyapi.com/api/episode/31",
-      "https://rickandmortyapi.com/api/episode/32",
-      "https://rickandmortyapi.com/api/episode/33",
-      "https://rickandmortyapi.com/api/episode/34",
-      "https://rickandmortyapi.com/api/episode/35",
-      "https://rickandmortyapi.com/api/episode/36",
-      "https://rickandmortyapi.com/api/episode/38",
-      "https://rickandmortyapi.com/api/episode/39",
-      "https://rickandmortyapi.com/api/episode/40",
-      "https://rickandmortyapi.com/api/episode/41"
-    ],
-      "url": "https://rickandmortyapi.com/api/character/3",
-      "created": "2017-11-04T19:09:56.428Z"
-    };
-    console.log('!!!!!! newPressedCardValue', newPressedCardValue);
-    console.log('this.setState.pressedCard', this.state.pressedCard)
+
     if (newPressedCardValue === undefined) {
-      console.log('newPressedCardValue === undefined  TRUE TRUE  TREU');
       this.setState({
         pressedCard: {debug_undefined: 'debug un'},
         showPopupFullCard: true,
       });
     } else {
-      console.log('newPressedCardValue === undefined  FALSE FALSE FALSE FALSE ');
       this.setState({
         pressedCard: newPressedCardValue,
-        // pressedCard: cardData,
         showPopupFullCard: true,
       });
 
     }
-    // this.setState(pressedCard)
-    // this.setState();
   }
 
   hideFullCard() {
     this.setState({showPopupFullCard: false});
-    // console.log('showPopupFullCard', this.state.showPopupFullCard)
-
   }
 
   render() {
@@ -163,7 +91,6 @@ class CharacterCard extends React.Component {
 
       </div>
     )
-    console.log('showPopupFullCard === true', this.props.characterList)
 
     return (
         (

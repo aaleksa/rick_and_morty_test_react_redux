@@ -7,10 +7,12 @@ import './index.css';
 import {
   loadCharacterListAsyncFilter,
   loadCharacterListAsync,
+  loadCharacterMultipleListAsync,
 } from '../../modules/counter';
 
 const filtersArray = [];
-// const numberPage = 1;
+const arrayCard = [1,2,3,4,5,6,7,8,9,10];
+
 
 class Characters extends React.Component {
   constructor(props) {
@@ -20,6 +22,7 @@ class Characters extends React.Component {
   }
   async componentDidMount() {
     this.props.loadCharacterListAsync();
+    this.props.loadCharacterMultipleListAsync(arrayCard);
   }
 
   handleInputChange(event) {
@@ -45,7 +48,6 @@ class Characters extends React.Component {
     } else {
       filtersArray.push(filters);
     }
-    console.log('filtersArray',filtersArray)
     this.props.loadCharacterListAsyncFilter(filtersArray);
   }
 
@@ -109,7 +111,6 @@ function mapStateToProps(state) {
   return {
     isRequestingCharacterList: state.counter.isRequestingCharacterList,
     characterList: state.counter.characterList,
-    listInfo: state.counter.listInfo,
   };
 }
 
@@ -118,6 +119,7 @@ const mapDispatchToProps = dispatch =>
     {
       loadCharacterListAsyncFilter,
       loadCharacterListAsync,
+      loadCharacterMultipleListAsync,
     },
     dispatch
   );
