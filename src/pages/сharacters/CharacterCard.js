@@ -166,19 +166,11 @@ class CharacterCard extends React.Component {
     console.log('showPopupFullCard === true', this.props.characterList)
 
     return (
-      this.state.showPopupFullCard ?
         (
           <div>
             <div className={'container-popup-character-card'}>
-              {popupFullCard}
+              {this.state.showPopupFullCard && popupFullCard}
             </div>
-            <div className={'container-main'}>
-              {listItems}
-            </div>
-          </div>
-        )
-        : (
-          <div>
             <div className={'container-main'}>
               {listItems}
             </div>
