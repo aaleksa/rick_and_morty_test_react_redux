@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './index.css';
 
-let pressedCard = {};
+// let pressedCard = {};
 class CharacterCard extends React.Component {
   // console.log('showPopupFullCard', showPopupFullCard)
   constructor(props) {
     super(props);
     this.state = {
       showPopupFullCard: false,
-
+      pressedCard: {},
     };
     this.showFullCard = this.showFullCard.bind(this);
     this.hideFullCard = this.hideFullCard.bind(this);
@@ -24,12 +24,24 @@ class CharacterCard extends React.Component {
     //  }
     // document.getElementById(event.target.parentElement.id).classList.add('pressedElement');
     const id = event.target.parentElement.id;
-   pressedCard = this.props.characterList.find((characterList) => {
-      if(id == characterList.id) return characterList;
+    console.log('id', id, 'typeof id', typeof id);
+    console.log('id', id, 'typeof id', typeof id);
+    const newPressedCardValue = this.props.characterList.find((characterList) => {
+      console.log('characterList.id', id, 'typeof characterList.id', typeof characterList.id);
+
+      if (id == characterList.id) {
+        return characterList;
+      }
+      return undefined;
+    });
+
+    console.log('newPressedCardValue', newPressedCardValue);
+    this.setState({
+      pressedCard: newPressedCardValue && {},
     });
     // this.setState(pressedCard)
     this.setState({showPopupFullCard: true});
-    console.log('this.setState.pressedCard',pressedCard)
+    console.log('this.setState.pressedCard', this.pressedCard)
   }
 
   hideFullCard() {
@@ -59,19 +71,32 @@ class CharacterCard extends React.Component {
         <div>
           <button onClick={this.hideFullCard}>X</button>
         </div>
-        <h2>{pressedCard.name}</h2>
-        <img className={'item-card-img'}
-             src={pressedCard.image}/>
-        <span>{pressedCard.species}</span>
-        <span>{pressedCard.status}</span>
-        <div className={'item-card-location'}>
-          <span>{pressedCard.location.name}</span>
-          <a href={pressedCard.location.url}/>
-        </div>
-        <div className={'item-card-origin'}>
-          <span>{pressedCard.origin.name}</span>
-          <a href={pressedCard.origin.url}/>
-        </div>
+        {
+          this.pressedCard && (
+              <>
+                <h2>{this.pressedCard.name}</h2>
+                <img className={'item-card-img'}
+                     src={this.pressedCard.image}/>
+                <span>{this.pressedCard.species}</span>
+                <span>{this.pressedCard.status}</span>
+                {
+                  this.pressedCard.location &&
+                  <div className={'item-card-location'}>
+                    <span>{this.pressedCard.location.name}</span>
+                    <a href={this.pressedCard.location.url}/>
+                  </div>
+                }
+                {
+                  this.pressedCard.origin &&
+                  <div className={'item-card-origin'}>
+                    <span>{this.pressedCard.origin.name}</span>
+                    <a href={this.pressedCard.origin.url}/>
+                  </div>
+                }
+              </>
+            )
+        }
+
 
       </div>
     )
