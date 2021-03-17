@@ -13,8 +13,6 @@ class CharacterCard extends React.Component {
     };
     this.showFullCard = this.showFullCard.bind(this);
     this.hideFullCard = this.hideFullCard.bind(this);
-    this.setState = this.setState.bind(this)
-
   }
 
   showFullCard(event) {
@@ -34,14 +32,78 @@ class CharacterCard extends React.Component {
       }
       return undefined;
     });
+    const cardData = {
+      "id": 3,
+      "name": "Summer Smith",
+      "status": "Alive",
+      "species": "Human",
+      "type": "",
+      "gender": "Female",
+      "origin": {
+      "name": "Earth (Replacement Dimension)",
+        "url": "https://rickandmortyapi.com/api/location/20"
+    },
+      "location": {
+      "name": "Earth (Replacement Dimension)",
+        "url": "https://rickandmortyapi.com/api/location/20"
+    },
+      "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+      "episode": [
+      "https://rickandmortyapi.com/api/episode/6",
+      "https://rickandmortyapi.com/api/episode/7",
+      "https://rickandmortyapi.com/api/episode/8",
+      "https://rickandmortyapi.com/api/episode/9",
+      "https://rickandmortyapi.com/api/episode/10",
+      "https://rickandmortyapi.com/api/episode/11",
+      "https://rickandmortyapi.com/api/episode/12",
+      "https://rickandmortyapi.com/api/episode/14",
+      "https://rickandmortyapi.com/api/episode/15",
+      "https://rickandmortyapi.com/api/episode/16",
+      "https://rickandmortyapi.com/api/episode/17",
+      "https://rickandmortyapi.com/api/episode/18",
+      "https://rickandmortyapi.com/api/episode/19",
+      "https://rickandmortyapi.com/api/episode/20",
+      "https://rickandmortyapi.com/api/episode/21",
+      "https://rickandmortyapi.com/api/episode/22",
+      "https://rickandmortyapi.com/api/episode/23",
+      "https://rickandmortyapi.com/api/episode/24",
+      "https://rickandmortyapi.com/api/episode/25",
+      "https://rickandmortyapi.com/api/episode/26",
+      "https://rickandmortyapi.com/api/episode/27",
+      "https://rickandmortyapi.com/api/episode/29",
+      "https://rickandmortyapi.com/api/episode/30",
+      "https://rickandmortyapi.com/api/episode/31",
+      "https://rickandmortyapi.com/api/episode/32",
+      "https://rickandmortyapi.com/api/episode/33",
+      "https://rickandmortyapi.com/api/episode/34",
+      "https://rickandmortyapi.com/api/episode/35",
+      "https://rickandmortyapi.com/api/episode/36",
+      "https://rickandmortyapi.com/api/episode/38",
+      "https://rickandmortyapi.com/api/episode/39",
+      "https://rickandmortyapi.com/api/episode/40",
+      "https://rickandmortyapi.com/api/episode/41"
+    ],
+      "url": "https://rickandmortyapi.com/api/character/3",
+      "created": "2017-11-04T19:09:56.428Z"
+    };
+    console.log('!!!!!! newPressedCardValue', newPressedCardValue);
+    console.log('this.setState.pressedCard', this.state.pressedCard)
+    if (newPressedCardValue === undefined) {
+      console.log('newPressedCardValue === undefined  TRUE TRUE  TREU');
+      this.setState({
+        pressedCard: {debug_undefined: 'debug un'},
+        showPopupFullCard: true,
+      });
+    } else {
+      console.log('newPressedCardValue === undefined  FALSE FALSE FALSE FALSE ');
+      this.setState({
+        pressedCard: cardData,
+        showPopupFullCard: true,
+      });
 
-    console.log('newPressedCardValue', newPressedCardValue);
-    this.setState({
-      pressedCard: newPressedCardValue && {},
-    });
+    }
     // this.setState(pressedCard)
-    this.setState({showPopupFullCard: true});
-    console.log('this.setState.pressedCard', this.pressedCard)
+    // this.setState();
   }
 
   hideFullCard() {
@@ -72,25 +134,25 @@ class CharacterCard extends React.Component {
           <button onClick={this.hideFullCard}>X</button>
         </div>
         {
-          this.pressedCard && (
+          this.state.pressedCard && (
               <>
-                <h2>{this.pressedCard.name}</h2>
+                <h2>{this.state.pressedCard.name}</h2>
                 <img className={'item-card-img'}
-                     src={this.pressedCard.image}/>
-                <span>{this.pressedCard.species}</span>
-                <span>{this.pressedCard.status}</span>
+                     src={this.state.pressedCard.image}/>
+                <span>{this.state.pressedCard.species}</span>
+                <span>{this.state.pressedCard.status}</span>
                 {
-                  this.pressedCard.location &&
+                  this.state.pressedCard.location &&
                   <div className={'item-card-location'}>
-                    <span>{this.pressedCard.location.name}</span>
-                    <a href={this.pressedCard.location.url}/>
+                    <span>{this.state.pressedCard.location.name}</span>
+                    <a href={this.state.pressedCard.location.url}/>
                   </div>
                 }
                 {
-                  this.pressedCard.origin &&
+                  this.state.pressedCard.origin &&
                   <div className={'item-card-origin'}>
-                    <span>{this.pressedCard.origin.name}</span>
-                    <a href={this.pressedCard.origin.url}/>
+                    <span>{this.state.pressedCard.origin.name}</span>
+                    <a href={this.state.pressedCard.origin.url}/>
                   </div>
                 }
               </>
@@ -100,31 +162,28 @@ class CharacterCard extends React.Component {
 
       </div>
     )
+    console.log('showPopupFullCard === true', this.props.characterList)
 
-    if (this.state.showPopupFullCard) {
-      console.log('showPopupFullCard === true', this.props.characterList)
-      return (
-        <div>
-          <div className={'container-popup-character-card'}>
-            {popupFullCard}
+    return (
+      this.state.showPopupFullCard ?
+        (
+          <div>
+            <div className={'container-popup-character-card'}>
+              {popupFullCard}
+            </div>
+            <div className={'container-main'}>
+              {listItems}
+            </div>
           </div>
-          <div className={'container-main'}>
-            {listItems}
+        )
+        : (
+          <div>
+            <div className={'container-main'}>
+              {listItems}
+            </div>
           </div>
-        </div>
-      )
-    } else {
-      console.log('showPopupFullCard === false', this.props.characterList)
-      return (
-        <div>
-          <div className={'container-main'}>
-            {listItems}
-          </div>
-        </div>
-      )
-    }
-
-
+        )
+    );
   }
 };
 
