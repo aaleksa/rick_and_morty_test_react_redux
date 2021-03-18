@@ -11,7 +11,7 @@ const initialState = {
   characterList: [],
   arrayPages: [],
   isRequestingCharacterList: false,
-
+  filterValue: '',
 }
 
 export default (state = initialState, action) => {
@@ -35,6 +35,7 @@ export default (state = initialState, action) => {
 
       return {
         ...state,
+        filterValue: action.filter,
         arrayPages: arrayPagesFilter,
         characterList: action.payload.results,
       };
@@ -72,6 +73,7 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
+        filterCharacter: action.payload.info.url,
         arrayPages: arrayPages,
       };
 
@@ -121,6 +123,7 @@ export const loadCharacterMultipleListAsync = (arrayCard) => {
 };
 
 export const loadCharacterListAsyncSelectedPage = (numberPage) => {
+
   return async (dispatch) => {
     dispatch({
       type: CHARACTER_LIST_REQUESTED,
@@ -134,15 +137,18 @@ export const loadCharacterListAsyncSelectedPage = (numberPage) => {
 };
 
 export const loadCharacterListAsyncFilter = (filters) => {
+
   return async (dispatch) => {
     dispatch({
       type: CHARACTER_LIST_REQUESTED_FILTER,
     })
     const list = await api.getListFilter(filters);
+
     console.log('loadCharacterListAsyncFilter list', list)
     dispatch({
       type: CHARACTER_LIST_FILTER,
       payload: list,
+      filter: filters,
     })
   };
 };

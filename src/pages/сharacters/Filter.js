@@ -103,6 +103,7 @@ class Filter extends React.Component {
 function mapStateToProps(state) {
   return {
     characterList: state.counter.characterList,
+    filters: state.counter.filterValue,
   };
 }
 const mapDispatchToProps = dispatch =>

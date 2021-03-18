@@ -42,11 +42,10 @@ async function getMultipleList(arrayCard) {
   return json;
 }
 
-async function getListSelectedPage(event) {
-  const numberPage = event.target.textContent;
-
+async function getListSelectedPage(strUrl) {
+console.log('getListSelectedPage',strUrl)
   let json = {};
-  const url = `${apiEndpoints.characters}/?page=${numberPage}`;
+  const url = `${apiEndpoints.characters}/?${strUrl}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {
