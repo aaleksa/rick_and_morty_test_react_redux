@@ -136,19 +136,20 @@ export const loadCharacterListAsyncSelectedPage = (numberPage) => {
   };
 };
 
-export const loadCharacterListAsyncFilter = (filters) => {
+export const loadCharacterListAsyncFilter = (filtersString, pageNumber = 1) => {
+  const pageAndFilterUrlPath = 'page=' + pageNumber + '&' + filtersString;
 
   return async (dispatch) => {
     dispatch({
       type: CHARACTER_LIST_REQUESTED_FILTER,
     })
-    const list = await api.getListFilter(filters);
+    const list = await api.getListFilter(pageAndFilterUrlPath);
 
     console.log('loadCharacterListAsyncFilter list', list)
     dispatch({
       type: CHARACTER_LIST_FILTER,
       payload: list,
-      filter: filters,
+      filter: filtersString,
     })
   };
 };

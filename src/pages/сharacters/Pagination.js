@@ -10,13 +10,12 @@ import {loadCharacterMultipleListAsync} from '../../modules/counter';
 const Pagination = (props) => {
   function selectedPage(event) {
     console.log('selectedPage', props.characterList, props.arrayPages, 'filters', props.filters)
-    let id = event.target.parentElement.id;
-    const strUrl = 'page=' + id + '&' + props.filters;
+    let pageNumber = event.target.parentElement.id;
     if (props.filters) {
-      props.loadCharacterListAsyncFilter(strUrl);
+      props.loadCharacterListAsyncFilter(props.filters, pageNumber);
     } else {
       let arrayCardIds = [];
-      let start = (id * 10 + 1);
+      let start = (pageNumber * 10 + 1);
       for (let i = start; i < 10 + start; i++) {
         console.log('i', i)
         arrayCardIds.push(i);
