@@ -107,13 +107,13 @@ export const loadCharacterListAsync = () => {
   };
 };
 
-export const loadCharacterMultipleListAsync = (arrayCard) => {
+export const loadCharacterMultipleListAsync = (arrayCardIds) => {
 
   return async (dispatch) => {
     dispatch({
       type: CHARACTER_LIST_REQUESTED,
     })
-    const list = await api.getMultipleList(arrayCard);
+    const list = await api.getMultipleList(arrayCardIds);
     console.log('loadCharacterMultipleListAsync respons', list)
     dispatch({
       type: CHARACTER_LIST,

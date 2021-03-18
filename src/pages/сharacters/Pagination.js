@@ -15,15 +15,15 @@ const Pagination = (props) => {
     if (props.filters) {
       props.loadCharacterListAsyncFilter(strUrl);
     } else {
-      let arrayCard = [];
+      let arrayCardIds = [];
       let start = (id * 10 + 1);
       for (let i = start; i < 10 + start; i++) {
         console.log('i', i)
-        arrayCard.push(i);
-        console.log(arrayCard)
+        arrayCardIds.push(i);
+        console.log(arrayCardIds)
       }
-      console.log('arrayCard', arrayCard, start)
-      props.loadCharacterMultipleListAsync(arrayCard);
+      console.log('arrayCardIds', arrayCardIds, start)
+      props.loadCharacterMultipleListAsync(arrayCardIds);
     }
   }
 
