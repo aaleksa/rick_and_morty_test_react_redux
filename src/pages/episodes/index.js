@@ -1,9 +1,55 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
+import {
+  loadEpisodesListAsync,
+  loadEpisodesListAsyncFilter,
+  loadEpisodesMultipleListAsync
+} from '../../actions/episodes';
+import {connect} from 'react-redux';
+import EpisodesCard from './EpisodesCard';
 
-const Episodes = () => (
-  <div>
-    <h2>episodes</h2>
-  </div>
-);
+class Episodes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrayCard: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
 
-export default Episodes;
+    };
+  }
+  async componentDidMount() {
+    // this.props.loadEpisodesListAsync('episodes');
+    this.props.loadEpisodesMultipleListAsync('episodes',this.state.arrayCard);
+  }
+
+  render() {
+    return (
+      <div className='container-episodes'>
+        <h1>Episodes</h1>
+        {/*<Filter/>*/}
+        <EpisodesCard/>
+        {/*<Pagination />*/}
+      </div>
+    )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    episodesList: state.episodes.episodesList,
+
+  };
+}
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      loadEpisodesMultipleListAsync,
+    },
+    dispatch
+  );
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Episodes);

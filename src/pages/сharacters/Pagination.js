@@ -2,14 +2,13 @@ import React from 'react';
 import './index.css';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
-import {loadCharacterListAsyncSelectedPage} from '../../modules/counter';
-import {loadCharacterListAsyncFilter} from '../../modules/counter';
-import {loadCharacterMultipleListAsync} from '../../modules/counter';
+import {loadCharacterListAsyncSelectedPage} from '../../actions/character';
+import {loadCharacterListAsyncFilter} from '../../actions/character';
+import {loadCharacterMultipleListAsync} from '../../actions/character';
 
 
 const Pagination = (props) => {
   function selectedPage(event) {
-    console.log('selectedPage', props.characterList, props.arrayPages, 'filters', props.filters)
     let pageNumber = event.target.parentElement.id;
     if (props.filters) {
       props.loadCharacterListAsyncFilter(props.filters, pageNumber);
@@ -17,11 +16,8 @@ const Pagination = (props) => {
       let arrayCardIds = [];
       let start = (pageNumber * 10 + 1);
       for (let i = start; i < 10 + start; i++) {
-        console.log('i', i)
         arrayCardIds.push(i);
-        console.log(arrayCardIds)
       }
-      console.log('arrayCardIds', arrayCardIds, start)
       props.loadCharacterMultipleListAsync(arrayCardIds);
     }
   }
@@ -51,9 +47,9 @@ const Pagination = (props) => {
 
 function mapStateToProps(state) {
   return {
-    arrayPages: state.counter.arrayPages,
-    characterList: state.counter.characterList,
-    filters: state.counter.filterValue,
+    arrayPages: state.character.arrayPages,
+    characterList: state.character.characterList,
+    filters: state.character.filterValue,
 
   };
 }

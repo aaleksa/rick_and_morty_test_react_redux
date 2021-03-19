@@ -109,7 +109,7 @@ class CharacterCard extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    characterList: state.counter.characterList,
+    characterList: state.character.characterList,
   };
 }
 

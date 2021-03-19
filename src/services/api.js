@@ -5,9 +5,9 @@ const apiEndpoints = {
   "episodes": "https://rickandmortyapi.com/api/episode",
 };
 
-async function getList() {
+async function getList(nameList) {
   let json = {};
-  const url = `${apiEndpoints.characters}`;
+  const url = `${apiEndpoints[nameList]}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -24,9 +24,9 @@ async function getList() {
 }
 
 
-async function getMultipleList(arrayCard) {
+async function getMultipleList(nameList,arrayCard) {
   let json = {};
-  const url = `${apiEndpoints.characters}/${arrayCard}`;
+  const url = `${apiEndpoints[nameList]}/${arrayCard}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {

@@ -9,7 +9,7 @@ import {
   loadCharacterListAsyncFilter,
   loadCharacterListAsync,
   loadCharacterMultipleListAsync,
-} from '../../modules/counter';
+} from '../../actions/character';
 
 
 class Characters extends React.Component {
@@ -21,8 +21,8 @@ class Characters extends React.Component {
     };
   }
   async componentDidMount() {
-    this.props.loadCharacterListAsync();
-    this.props.loadCharacterMultipleListAsync(this.state.arrayCard);
+    // this.props.loadCharacterListAsync('characters');
+    this.props.loadCharacterMultipleListAsync('characters',this.state.arrayCard);
   }
 
   render() {
@@ -40,8 +40,8 @@ class Characters extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isRequestingCharacterList: state.counter.isRequestingCharacterList,
-    characterList: state.counter.characterList,
+    isRequestingCharacterList: state.character.isRequestingCharacterList,
+    characterList: state.character.characterList,
   };
 }
 

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {
   loadCharacterListAsyncFilter,
-} from '../../modules/counter';
+} from '../../actions/character';
 
 
 class Filter extends React.Component {
@@ -102,8 +102,8 @@ class Filter extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    characterList: state.counter.characterList,
-    filters: state.counter.filterValue,
+    characterList: state.character.characterList,
+    filters: state.character.filterValue,
   };
 }
 const mapDispatchToProps = dispatch =>

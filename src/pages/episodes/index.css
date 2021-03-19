@@ -1,0 +1,29 @@
+.container-episodes {
+  display: flex;
+  flex-direction: column;
+  background-color: wheat;
+  align-items: center;
+  color: cornflowerblue;
+}
+
+.container-main {
+  width: 90%;
+}
+
+.container-table {
+  background-color: cornsilk;
+  padding: 20px;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-card {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.list-item-episodes {
+
+}
+
+
+
