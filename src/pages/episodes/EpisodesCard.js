@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './index.css';
+import './episodes.css';
 
 class EpisodesCard extends React.Component {
   render() {
@@ -8,23 +8,35 @@ class EpisodesCard extends React.Component {
       <table className={'container-table'}>
         <thead>
         <tr>
-          <th  className={'item-card'}>Название эпизода</th>
-          <th  className={'item-card'}>Дата выхода</th>
-          <th  className={'item-card'}>Герои</th>
-          <th  className={'item-card'}>Ссылка</th>
+          <th className={'item-card-episodes '}>Название эпизода</th>
+          <th className={'item-card-episodes '}>Дата выхода</th>
+          <th className={'item-card-episodes '}>Герои</th>
+          <th className={'item-card-episodes '}>Ссылка</th>
         </tr>
         </thead>
-        {/*<tbody className={'list-item-episodes'}>*/}
-        {/*{this.props.episodesList && this.props.episodesList.map((episodesList) => (*/}
-        {/*  <tr key={episodesList.id} className={'item-card'} id={episodesList.id}>*/}
-        {/*    <th scope="col">{episodesList.name}</th>*/}
-        {/*    <th scope="col">{episodesList.air_date}</th>*/}
-        {/*    <th scope="col"></th>*/}
-        {/*    <th scope="col">{episodesList.url}</th>*/}
-        {/*  </tr>*/}
-        {/*))}*/}
+        <tbody className={'list-item-episodes'}>
+        {this.props.episodesList && this.props.episodesList.map((episodesList) => (
+          <tr key={episodesList.id} id={episodesList.id}>
+            <th className={'item-card-episodes '}>{episodesList.name}</th>
+            <th className={'item-card-episodes '}>{episodesList.air_date}</th>
+            <th className={'item-card-episodes '}>
+              <ul>
+                {episodesList.characters && episodesList.characters.map((characters, index) => (
+                  <li key={index}
+                    className={'list-characters'}>
+                    <a href={characters}
+                     className={'link-character'}>{characters}</a>
+                  </li>
+                ))}
 
-        {/*</tbody>*/}
+              </ul>
+            </th>
+            <th className={'item-card-episodes '}>
+              <a href={episodesList.url}>{episodesList.url}</a></th>
+          </tr>
+        ))}
+
+        </tbody>
       </table>
     )
     return (

@@ -43,22 +43,7 @@ export default (state = initialStateCharacter, action) => {
         characterList: action.payload,
         isRequestingCharacterList: !state.isRequestingCharacterList,
       };
-    // case CHARACTER_LIST:
-    //   const arrayPages = [];
-    //   const arrayLen = action.payload.info.pages;
-    //   for (let i = 1; i <= arrayLen*2; i++) {
-    //     const itemNumberPage = {
-    //       id: i,
-    //       value: i
-    //     }
-    //     arrayPages.push(itemNumberPage)
-    //   }
-    //   return {
-    //     ...state,
-    //     characterList: action.payload.results,
-    //     isRequestingCharacterList: !state.isRequestingCharacterList,
-    //     arrayPages: arrayPages,
-    //   };
+
     case CHARACTER_INFO:
       const arrayPages = [];
       const arrayLen = action.payload.info.pages;

@@ -21,7 +21,7 @@ class Characters extends React.Component {
     };
   }
   async componentDidMount() {
-    // this.props.loadCharacterListAsync('characters');
+    this.props.loadCharacterListAsync('characters');
     this.props.loadCharacterMultipleListAsync('characters',this.state.arrayCard);
   }
 

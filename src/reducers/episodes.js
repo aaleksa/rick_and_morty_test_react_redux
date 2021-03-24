@@ -46,8 +46,9 @@ export default (state = initialStateEpisodes, action) => {
 
     case EPISODES_INFO:
       const arrayPages = [];
-      const arrayLen = action.payload.info.pages;
-      for (let i = 1; i <= arrayLen * 2; i++) {
+      const arrayLen = action.payload.info.count / 25;
+      console.log('arrayLen',arrayLen)
+      for (let i = 1; i <= arrayLen; i++) {
         const itemNumberPage = {
           id: i,
           value: i
@@ -56,7 +57,6 @@ export default (state = initialStateEpisodes, action) => {
       }
       return {
         ...state,
-        filterCharacter: action.payload.info.url,
         arrayPages: arrayPages,
       };
 

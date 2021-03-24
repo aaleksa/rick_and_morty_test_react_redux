@@ -7,6 +7,8 @@ import {
 } from '../../actions/episodes';
 import {connect} from 'react-redux';
 import EpisodesCard from './EpisodesCard';
+import Pagination from '../сharacters/Pagination';
+
 
 class Episodes extends React.Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class Episodes extends React.Component {
     };
   }
   async componentDidMount() {
-    // this.props.loadEpisodesListAsync('episodes');
+    this.props.loadEpisodesListAsync('episodes');
     this.props.loadEpisodesMultipleListAsync('episodes',this.state.arrayCard);
   }
 
@@ -27,7 +29,7 @@ class Episodes extends React.Component {
         <h1>Episodes</h1>
         {/*<Filter/>*/}
         <EpisodesCard/>
-        {/*<Pagination />*/}
+        <Pagination />
       </div>
     )
   }
@@ -43,6 +45,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      loadEpisodesListAsync,
       loadEpisodesMultipleListAsync,
     },
     dispatch

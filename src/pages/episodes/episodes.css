@@ -14,14 +14,23 @@
   background-color: cornsilk;
   padding: 20px;
   width: 100%;
-  border-collapse: collapse;
+  /*border-collapse: collapse;*/
 }
 
-.item-card {
+.item-card-episodes {
+  padding: 15px;
   border: 1px solid #ddd;
-  padding: 8px;
+  text-align: start;
+
 }
-.list-item-episodes {
+.item-card-episodes ul {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.list-characters {
+  list-style: none;
+  margin: 10px;
 
 }
 
