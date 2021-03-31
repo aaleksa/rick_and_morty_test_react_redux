@@ -63,7 +63,7 @@ const page10ItemsFromPage20Results = (pageBy20Items, pageNumberBy10) => {
   return pageBy10Items;
 }
 
-export const loadCharacterListAsyncFilter = (filtersString = '', pageBy10Number = 1) => {
+export const loadCharacterListAsyncFilter = (nameList,filtersString = '', pageBy10Number = 1) => {
 
   const pageBy20Number = pageBy20FromBy10Number(pageBy10Number);
   const pageAndFilterUrlPath = 'page=' + pageBy20Number + '&' + filtersString;
@@ -72,7 +72,7 @@ export const loadCharacterListAsyncFilter = (filtersString = '', pageBy10Number 
     dispatch({
       type: CHARACTER_LIST_REQUESTED_FILTER,
     })
-    const listBy20 = await api.getListFilter(pageAndFilterUrlPath);
+    const listBy20 = await api.getListFilter(nameList,pageAndFilterUrlPath);
     const pageItemsBy10 = page10ItemsFromPage20Results(listBy20.results, pageBy10Number);
     const listBy10 = {
       info: {

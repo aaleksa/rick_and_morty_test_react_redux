@@ -19,7 +19,7 @@ async function getList(nameList) {
   } else {
     alert("Ошибка HTTP: " + response.status);
   }
-  console.log('json', json);
+  // console.log('json', json);
   return json;
 }
 
@@ -38,12 +38,12 @@ async function getMultipleList(nameList,arrayCard) {
   } else {
     alert("Ошибка HTTP: " + response.status);
   }
-  console.log('json', json);
+  // console.log('json', json);
   return json;
 }
 
 async function getListSelectedPage(strUrl) {
-console.log('getListSelectedPage',strUrl)
+// console.log('getListSelectedPage',strUrl)
   let json = {};
   const url = `${apiEndpoints.characters}/?${strUrl}`;
   const response = await fetch(url, {
@@ -62,11 +62,11 @@ console.log('getListSelectedPage',strUrl)
   return json;
 }
 
-async function getListFilter(filter) {
-  console.log('getListFilter',filter)
+async function getListFilter(nameList,filter) {
+  // console.log('getListFilter',filter)
 
   let json = {};
-  const url = `${apiEndpoints.characters}/?${filter}`;
+  const url = `${apiEndpoints[nameList]}/?${filter}`;
   const response = await fetch(url, {
     method: 'GET',
     headers: {

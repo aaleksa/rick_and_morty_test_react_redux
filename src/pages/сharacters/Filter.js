@@ -46,7 +46,7 @@ class Filter extends React.Component {
       return str;
     });
     this.filtersString = filtersString.join('&');
-    this.props.loadCharacterListAsyncFilter(this.filtersString);
+    this.props.loadCharacterListAsyncFilter('characters',this.filtersString);
   }
   render() {
     return (

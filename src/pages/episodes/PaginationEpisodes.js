@@ -1,24 +1,23 @@
 import React from 'react';
-import './index.css';
+import './episodes.css';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
-import {loadEpisodesListAsyncFilter} from '../../actions/episodes';
 import {loadEpisodesMultipleListAsync} from '../../actions/episodes';
 
 
-const Pagination = (props) => {
+const PaginationEpisodes = (props) => {
   function selectedPage(event) {
-    let pageNumber = event.target.parentElement.id;
-    if (props.filters) {
-      props.loadEpisodesListAsyncFilter(props.filters, pageNumber);
-    } else {
+    let pageNumber = event.target.parentElement.id - 1;
+    // if (props.filters) {
+    //   props.loadEpisodesListAsyncFilter(props.filters, pageNumber);
+    // } else {
       let arrayCardIds = [];
-      let start = (pageNumber * 10 + 1);
-      for (let i = start; i < 10 + start; i++) {
+      let start = (pageNumber * 25 + 1);
+      for (let i = start; i < 25 + start; i++) {
         arrayCardIds.push(i);
       }
       props.loadEpisodesMultipleListAsync('episodes',arrayCardIds);
-    }
+    // }
   }
 
   const listItems = (
@@ -46,17 +45,13 @@ const Pagination = (props) => {
 
 function mapStateToProps(state) {
   return {
-    arrayPages: state.character.arrayPages,
-    characterList: state.character.characterList,
-    filters: state.character.filterValue,
-
+    arrayPages: state.episodes.arrayPages,
   };
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      loadEpisodesListAsyncFilter,
       loadEpisodesMultipleListAsync,
     },
     dispatch
@@ -65,5 +60,5 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Pagination);
+)(PaginationEpisodes);
 

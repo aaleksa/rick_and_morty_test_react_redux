@@ -1,7 +1,7 @@
 import {
   EPISODES_INFO,
   EPISODES_LIST,
-  EPISODES_LIST_FILTER,
+  EPISODES_LIST_FILTER, EPISODES_LIST_FULL,
   EPISODES_LIST_REQUESTED
 } from '../actions/episodes';
 
@@ -10,6 +10,8 @@ const initialStateEpisodes = {
   arrayPages: [],
   isRequestingEpisodesList: false,
   filterValue: '',
+  arrayEpisodes: [],
+  episodesFullList: [],
 }
 
 export default (state = initialStateEpisodes, action) => {
@@ -20,34 +22,42 @@ export default (state = initialStateEpisodes, action) => {
         ...state,
         isRequestingEpisodesList: true,
       };
-    // case EPISODES_LIST_FILTER:
-    //   const arrayPagesFilter = [];
-    //   const arrayLenFilter = action.payload.info.pages;
-    //   for (let i = 1; i <= arrayLenFilter; i++) {
-    //     const itemNumberPage = {
-    //       id: i,
-    //       value: i
-    //     }
-    //     arrayPagesFilter.push(itemNumberPage)
-    //   }
-    //
-    //   return {
-    //     ...state,
-    //     filterValue: action.filter,
-    //     arrayPages: arrayPagesFilter,
-    //     episodesList: action.payload.results,
-    //   };
+    case EPISODES_LIST_FILTER:
+      // const arrayPagesFilter = [];
+      // const arrayLenFilter = action.payload.info.pages;
+      // for (let i = 1; i <= arrayLenFilter; i++) {
+      //   const itemNumberPage = {
+      //     id: i,
+      //     value: i
+      //   }
+      //   arrayPagesFilter.push(itemNumberPage)
+      // }
+
+      return {
+        ...state,
+        // filterValue: action.filter,
+        // arrayPages: arrayPagesFilter,
+        episodesList: action.payload.results,
+      };
     case EPISODES_LIST:
       return {
         ...state,
         episodesList: action.payload,
         isRequestingEpisodesList: !state.isRequestingEpisodesList,
       };
-
+    case EPISODES_LIST_FULL:
+      return {
+        ...state,
+        episodesFullList: action.payload,
+      };
     case EPISODES_INFO:
       const arrayPages = [];
-      const arrayLen = action.payload.info.count / 25;
-      console.log('arrayLen',arrayLen)
+      const arrayEpisodes = [];
+      for (let i = 0; i < action.payload.info.count; i++) {
+        arrayEpisodes.push(i);
+      }
+      const arrayLen = Math.round(action.payload.info.count / 25);
+      // console.log('arrayLen',arrayLen)
       for (let i = 1; i <= arrayLen; i++) {
         const itemNumberPage = {
           id: i,
@@ -58,6 +68,7 @@ export default (state = initialStateEpisodes, action) => {
       return {
         ...state,
         arrayPages: arrayPages,
+        arrayEpisodes: arrayEpisodes,
       };
 
     default:
