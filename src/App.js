@@ -18,7 +18,7 @@ const App = () => {
     console.log('activeElement',activeElement)
     const element = event.target;
 
-    if(activeElement.length != 0){
+    if(activeElement.length > 0){
       activeElement[0].classList.remove('active-page');
       element.classList.add('active-page')
 

@@ -49,7 +49,6 @@ const mapDispatchToProps = dispatch =>
     {
       loadEpisodesListAsync,
       loadFullListEpisodes,
-
       loadEpisodesMultipleListAsync,
     },
     dispatch
