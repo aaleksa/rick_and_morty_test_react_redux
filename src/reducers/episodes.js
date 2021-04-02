@@ -23,20 +23,8 @@ export default (state = initialStateEpisodes, action) => {
         isRequestingEpisodesList: true,
       };
     case EPISODES_LIST_FILTER:
-      // const arrayPagesFilter = [];
-      // const arrayLenFilter = action.payload.info.pages;
-      // for (let i = 1; i <= arrayLenFilter; i++) {
-      //   const itemNumberPage = {
-      //     id: i,
-      //     value: i
-      //   }
-      //   arrayPagesFilter.push(itemNumberPage)
-      // }
-
       return {
         ...state,
-        // filterValue: action.filter,
-        // arrayPages: arrayPagesFilter,
         episodesList: action.payload.results,
       };
     case EPISODES_LIST:
@@ -57,7 +45,6 @@ export default (state = initialStateEpisodes, action) => {
         arrayEpisodes.push(i);
       }
       const arrayLen = Math.round(action.payload.info.count / 25);
-      // console.log('arrayLen',arrayLen)
       for (let i = 1; i <= arrayLen; i++) {
         const itemNumberPage = {
           id: i,

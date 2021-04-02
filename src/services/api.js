@@ -38,12 +38,10 @@ async function getMultipleList(nameList,arrayCard) {
   } else {
     alert("Ошибка HTTP: " + response.status);
   }
-  // console.log('json', json);
   return json;
 }
 
 async function getListSelectedPage(strUrl) {
-// console.log('getListSelectedPage',strUrl)
   let json = {};
   const url = `${apiEndpoints.characters}/?${strUrl}`;
   const response = await fetch(url, {

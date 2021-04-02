@@ -8,9 +8,6 @@ import {loadEpisodesMultipleListAsync} from '../../actions/episodes';
 const PaginationEpisodes = (props) => {
   function selectedPage(event) {
     let pageNumber = event.target.parentElement.id - 1;
-    // if (props.filters) {
-    //   props.loadEpisodesListAsyncFilter(props.filters, pageNumber);
-    // } else {
       let arrayCardIds = [];
       let start = (pageNumber * 25 + 1);
       for (let i = start; i < 25 + start; i++) {
