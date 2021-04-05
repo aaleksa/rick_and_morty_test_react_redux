@@ -1,4 +1,5 @@
 import api from '../services/api';
+import {EPISODES_INFO_REQUESTED, EPISODES_LIST_FULL} from './episodes';
 
 export const CHARACTER_LIST_REQUESTED = 'counter/CHARACTER_LIST_REQUESTED'
 export const CHARACTER_LIST = 'counter/CHARACTER_LIST'
@@ -6,6 +7,8 @@ export const CHARACTER_LIST_REQUESTED_FILTER = 'counter/CHARACTER_LIST_REQUESTED
 export const CHARACTER_LIST_FILTER = 'counter/CHARACTER_LIST_FILTER'
 export const CHARACTER_INFO_REQUESTED = 'counter/CHARACTER_INFO_REQUESTED'
 export const CHARACTER_INFO = 'counter/CHARACTER_INFO'
+export const  CHARACTER_LIST_FULL = 'counter/ CHARACTER_LIST_FULL'
+
 
 
 export const loadCharacterListAsync = (nameList) => {
@@ -32,6 +35,19 @@ export const loadCharacterMultipleListAsync = (nameList,arrayCardIds) => {
     console.log('loadCharacterMultipleListAsync respons', list)
     dispatch({
       type: CHARACTER_LIST,
+      payload: list,
+    })
+  };
+};
+
+export const loadFullListCharacter = (nameList,arrayCharacter) => {
+  return async (dispatch) => {
+    dispatch({
+      type: CHARACTER_LIST_REQUESTED,
+    })
+    const list = await api.getMultipleList(nameList,arrayCharacter);
+    dispatch({
+      type: CHARACTER_LIST_FULL,
       payload: list,
     })
   };

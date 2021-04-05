@@ -9,6 +9,7 @@ import {
   loadCharacterListAsyncFilter,
   loadCharacterListAsync,
   loadCharacterMultipleListAsync,
+  loadFullListCharacter
 } from '../../actions/character';
 
 
@@ -21,8 +22,9 @@ class Characters extends React.Component {
     };
   }
   async componentDidMount() {
-    this.props.loadCharacterListAsync('characters');
-    this.props.loadCharacterMultipleListAsync('characters',this.state.arrayCard);
+    await this.props.loadCharacterListAsync('characters');
+    await this.props.loadFullListCharacter('characters',this.props.arrayCharacter)
+    await this.props.loadCharacterMultipleListAsync('characters',this.state.arrayCard);
   }
 
   render() {
@@ -42,6 +44,8 @@ function mapStateToProps(state) {
   return {
     isRequestingCharacterList: state.character.isRequestingCharacterList,
     characterList: state.character.characterList,
+    arrayCharacter: state.character.arrayCharacter,
+    characterFullList: state.character.characterFullList
   };
 }
 
@@ -51,6 +55,7 @@ const mapDispatchToProps = dispatch =>
       loadCharacterListAsyncFilter,
       loadCharacterListAsync,
       loadCharacterMultipleListAsync,
+      loadFullListCharacter
     },
     dispatch
   );

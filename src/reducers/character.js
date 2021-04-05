@@ -1,6 +1,7 @@
 import {
   CHARACTER_INFO,
   CHARACTER_LIST,
+  CHARACTER_LIST_FULL,
   CHARACTER_LIST_FILTER,
   CHARACTER_LIST_REQUESTED
 } from '../actions/character';
@@ -10,6 +11,9 @@ const initialStateCharacter = {
   arrayPages: [],
   isRequestingCharacterList: false,
   filterValue: '',
+  arrayCharacter: [],
+  characterFullList: [],
+
 }
 
 export default (state = initialStateCharacter, action) => {
@@ -19,6 +23,11 @@ export default (state = initialStateCharacter, action) => {
       return {
         ...state,
         isRequestingCharacterList: true,
+      };
+    case CHARACTER_LIST_FULL:
+      return {
+        ...state,
+        characterFullList: action.payload,
       };
     case CHARACTER_LIST_FILTER:
       const arrayPagesFilter = [];
@@ -46,6 +55,10 @@ export default (state = initialStateCharacter, action) => {
 
     case CHARACTER_INFO:
       const arrayPages = [];
+      const arrayCharacter = [];
+      for (let i = 0; i < action.payload.info.count; i++) {
+        arrayCharacter.push(i);
+      }
       const arrayLen = action.payload.info.pages;
       for (let i = 1; i <= arrayLen * 2; i++) {
         const itemNumberPage = {
@@ -58,6 +71,7 @@ export default (state = initialStateCharacter, action) => {
         ...state,
         filterCharacter: action.payload.info.url,
         arrayPages: arrayPages,
+        arrayCharacter: arrayCharacter,
       };
 
     default:
