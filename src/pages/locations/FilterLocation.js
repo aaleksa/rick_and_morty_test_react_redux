@@ -3,19 +3,21 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import './location.css';
 import {loadLocationsListAsyncFilter} from '../../actions/locations';
-// import locations from '../../reducers/locations';
-
 
 class FilterLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state  = {
-      // name: '',
-      // type: '',
-      typeLocation: ['Planet', 'Cluster','Space station','Microverse','TV','Resort','Fantasy town','Dream','Dimension','unknown','Menagerie']
+      filteredList: [...props.locationsFullList],
+      filteredListType: [...props.typeLocation],
+      filteredListDimension: [...props.arrayDimensions],
+      name: '',
+      type: '',
+      dimension: '',
     };
     this.visibleListLocation = this.visibleListLocation.bind(this);
     this.selectLocations = this.selectLocations.bind(this);
+    this.changeLocation = this.changeLocation.bind(this);
   };
 
   visibleListLocation (event){
@@ -25,10 +27,35 @@ class FilterLocation extends React.Component {
       event.target.nextSibling.classList.add('visible-list')
     }
   }
+  changeLocation(event){
+    let filterField = event.target.classList[1];
+    if(filterField === 'name'){
+      this.setState({name: event.target.value});
+      const searchString = event.target.value;
+      this.setState({filteredList:this.props.locationsFullList.filter((location) => {
+        return location.name.includes(searchString);
+      })});
+    }
+    if(filterField === 'type'){
+      this.setState({type: event.target.value});
+      const searchString = event.target.value;
+      this.setState({filteredListType: this.props.typeLocation.filter((location) => {
+        return location.includes(searchString);
+      })});
+    }
+    if(filterField === 'dimension'){
+      this.setState({dimension: event.target.value});
+      const searchString = event.target.value;
+      this.setState({filteredListDimension: this.props.arrayDimensions.filter((location) => {
+        return location.includes(searchString);
+      })});
+    }
+
+  }
   selectLocations(event){
     let filterField = event.target.classList[1];
+    this.setState({[filterField]: event.target.textContent});
     let filtersString = filterField +'=' + event.target.textContent;
-    // let filtersString = 'name=Planet'
     this.props.loadLocationsListAsyncFilter('locations',filtersString);
   }
 
@@ -37,13 +64,14 @@ class FilterLocation extends React.Component {
       <div className={'filter-container'}>
         <form className={'filter-location-form'}>
           <div className={'filter-location-select'}>
-            <input className={'input-location-list'}
-                   type="text"
+            <input className={'input-location-list type'}
                    placeholder={'Тип локации'}
+                   value={this.state.type}
+                   onChange={this.changeLocation}
                    onClick={this.visibleListLocation}
             />
             <ul className={'container-list'}>
-              {this.state.typeLocation && this.state.typeLocation.map((itemType,index) =>(
+              {this.state.filteredListType && this.state.filteredListType.map((itemType,index) =>(
                 <li key={index}
                   onClick={this.selectLocations}
                     className={'filter-location-option type'}>
@@ -56,17 +84,37 @@ class FilterLocation extends React.Component {
         </form>
         <form className={'filter-location-form'}>
           <div className={'filter-location-select'}>
-            <input className={'input-location-list'}
-                   type="text"
+            <input className={'input-location-list name'}
                    placeholder={'Названия локации'}
+                   value={this.state.name}
                    onClick={this.visibleListLocation}
-            />
+                   onChange={this.changeLocation}/>
             <ul className={'container-list'}>
-              {this.props.locationsFullList && this.props.locationsFullList.map((itemType,index) =>(
+              {this.state.filteredList && this.state.filteredList.map((itemType,index) =>(
                 <li key={index}
-                  onClick={this.selectLocations}
+                    onClick={this.selectLocations}
                     className={'filter-location-option name'}>
                   {itemType.name}
+                </li>
+              ))}
+            </ul>
+
+          </div>
+        </form>
+        <form className={'filter-location-form'}>
+          <div className={'filter-location-select'}>
+            <input className={'input-location-list dimension'}
+                   placeholder={'Измерение локации'}
+                   onClick={this.visibleListLocation}
+                   value={this.state.dimension}
+                   onChange={this.changeLocation}
+            />
+            <ul className={'container-list'}>
+              {this.state.filteredListDimension && this.state.filteredListDimension.map((itemDimension,index) =>(
+                <li key={index}
+                    onClick={this.selectLocations}
+                    className={'filter-location-option dimension'}>
+                  {itemDimension}
                 </li>
               ))}
             </ul>
@@ -80,7 +128,9 @@ class FilterLocation extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    typeLocation: state.locations.typeLocation,
     locationsFullList: state.locations.locationsFullList,
+    arrayDimensions: state.locations.arrayDimensions,
   };
 }
 

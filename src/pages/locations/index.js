@@ -41,7 +41,6 @@ class Locations extends React.Component {
  function mapStateToProps (state){
   return {
     locationsList: state.locations.locationsList,
-    // characterList: state.character.characterList,
     arrayLocation: state.locations.arrayLocation,
 
   }

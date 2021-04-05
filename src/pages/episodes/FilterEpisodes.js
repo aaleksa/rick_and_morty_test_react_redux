@@ -36,7 +36,7 @@ class FilterEpisodes extends React.Component {
     });
   }
   selectEpisodes(event){
-    // this.setState({name: event.target.textContent});
+    this.setState({name: event.target.textContent});
     let filtersString = 'name=' + event.target.textContent;
     this.props.loadEpisodesListAsyncFilter('episodes',filtersString);
 
