@@ -19,6 +19,20 @@ export const loadLocationsListAsync = (nameList) => {
     })
   };
 };
+export const loadFullListLocation = (nameList,arrayLocations) => {
+  return async (dispatch) => {
+    dispatch({
+      type: LOCATIONS_INFO_REQUESTED,
+    })
+    const list = await api.getMultipleList(nameList,arrayLocations);
+    dispatch({
+      type: LOCATIONS_LIST_FULL,
+      payload: list,
+    })
+  };
+};
+
+
 export const loadLocationsMultipleListAsync = (nameList,arrayCard) => {
   return async (dispatch) => {
     dispatch({
@@ -27,6 +41,19 @@ export const loadLocationsMultipleListAsync = (nameList,arrayCard) => {
     const list = await api.getMultipleList(nameList,arrayCard);
     dispatch({
       type: LOCATIONS_LIST,
+      payload: list,
+    })
+  };
+};
+
+export const loadLocationsListAsyncFilter = (nameList,filter) => {
+  return async (dispatch) => {
+    dispatch({
+      type: LOCATIONS_INFO_REQUESTED,
+    })
+    const list = await api.getListFilter(nameList,filter);
+    dispatch({
+      type: LOCATIONS_LIST_FILTER,
       payload: list,
     })
   };

@@ -3,32 +3,17 @@ import {connect} from 'react-redux';
 import './location.css';
 
 function isCharacterForEachLocation(resident) {
-  // let arrayCharacterForEachLocation = [];
-  // let arrayCharacterOneLocation = [];
-  // let payloadLength = this.props.locationsList.length;
-  // for (let i = 0; i < payloadLength; i++) {
-  //   let residentsLength = this.props.locationsList[i].residents.length;
-  //   arrayCharacterOneLocation = [];
-  //   for (let y = 0; y < residentsLength; y++) {
   let url = resident;
-  console.log('url', url)
   let str = url.substring(url.lastIndexOf("/") + 1);
   return str;
-  //     arrayCharacterOneLocation.push(str);
-  //   }
-  //   arrayCharacterForEachLocation.push(arrayCharacterOneLocation);
-  //   console.log('arrayCharacterForEachLocation', arrayCharacterForEachLocation)
-  // }
 }
 
 class LocationsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      apiEndpoints: 'https://rickandmortyapi.com/api/character/avatar/',
+      apiEndpointsAvatar: 'https://rickandmortyapi.com/api/character/avatar/',
     };
-    // this.isCharacterForEachLocation = this.isCharacterForEachLocation.bind();
-
   }
 
   render() {
@@ -49,18 +34,14 @@ class LocationsCard extends React.Component {
             <th className={'item-card-locations '}>{locationsItem.name}</th>
             <th className={'item-card-locations '}>{locationsItem.type}</th>
             <th className={'item-card-locations '}>
-              <ul>
+              <ul className={'container-img-characters'}>
                 {locationsItem.residents && locationsItem.residents.map( (resident, index) => (
                   <li key={index}
-                      className={'list-characters'}>
-                    {/*<div>{character}</div>*/}
-                    <img src={this.state.apiEndpoints + '/' + isCharacterForEachLocation(resident) + '.jpeg'}/>
-                    <a key={index}
-                          href={resident} className={'link-character'}>
-                    </a>
+                      className={'item-characters'}>
+                    <img className={'img-character'}
+                         alt={'Нет картинки'} src={this.state.apiEndpointsAvatar + '/' + isCharacterForEachLocation(resident) + '.jpeg'}/>
                   </li>
                 ))}
-
               </ul>
             </th>
             <th className={'item-card-locations '}>{locationsItem.dimension}</th>

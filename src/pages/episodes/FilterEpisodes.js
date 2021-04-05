@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {loadEpisodesListAsyncFilter} from '../../actions/episodes';
 import {loadEpisodesMultipleListAsync} from '../../actions/episodes';
-import episodes from '../../reducers/episodes';
+// import episodes from '../../reducers/episodes';
 
 
 class FilterEpisodes extends React.Component {
@@ -13,7 +13,6 @@ class FilterEpisodes extends React.Component {
     this.state = {
       name: '',
       filteredList: [...props.episodesFullList],
-      // filteredList: props.episodesFullList.map(item => { return item; }),
     };
     this.visibleListEpisodes = this.visibleListEpisodes.bind(this);
     this.changeEpisodes = this.changeEpisodes.bind(this);
@@ -37,7 +36,7 @@ class FilterEpisodes extends React.Component {
     });
   }
   selectEpisodes(event){
-    this.setState({name: event.target.textContent});
+    // this.setState({name: event.target.textContent});
     let filtersString = 'name=' + event.target.textContent;
     this.props.loadEpisodesListAsyncFilter('episodes',filtersString);
 

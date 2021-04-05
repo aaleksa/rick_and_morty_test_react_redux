@@ -30,7 +30,7 @@ const App = () => {
   return (
     <div className={'main-container'}>
       <div className={'navigator-container'}>
-        <Link className={'item-navigation'}
+        <Link className={'item-navigation active-page'}
               onClick={isActivePage}
               to="/">Characters</Link>
         <Link className={'item-navigation'}
@@ -43,7 +43,7 @@ const App = () => {
               onClick={isActivePage}
               to="/myWatchList">MyWatchList</Link>
       </div>
-      <div>
+      <div className={'component-container'}>
         <Route exact path="/" component={Characters}/>
         <Route exact path="/episodes" component={Episodes}/>
         <Route exact path="/locations" component={Locations}/>

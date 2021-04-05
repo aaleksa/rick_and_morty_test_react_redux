@@ -13,7 +13,6 @@ const initialStateLocations = {
   filterValue: '',
   arrayLocation: [],
   locationsFullList: [],
-  arrayCharacterForEachLocation: [],
 }
 
 export default (state = initialStateLocations, action) => {
@@ -31,28 +30,10 @@ export default (state = initialStateLocations, action) => {
         locationsList: action.payload.results,
       };
     case LOCATIONS_LIST:
-      console.log('action.payload',action.payload)
-      let arrayCharacterForEachLocation = [];
-      let arrayCharacterOneLocation = [];
-      let payloadLength = action.payload.length;
-        for(let i = 0; i < payloadLength; i++){
-          let residentsLength = action.payload[i].residents.length;
-          arrayCharacterOneLocation = [];
-          for(let y = 0; y < residentsLength; y++){
-            let url = action.payload[i].residents[y];
-            console.log('url',url)
-            let str = url.substring(url.lastIndexOf("/")+1);
-            arrayCharacterOneLocation.push(str);
-          }
-          arrayCharacterForEachLocation.push(arrayCharacterOneLocation);
-          console.log('arrayCharacterForEachLocation',arrayCharacterForEachLocation)
-        }
       return {
         ...state,
         locationsList: action.payload,
         isRequestingLocationsList: !state.isRequestingLocationsList,
-        arrayCharacterForEachLocation: arrayCharacterForEachLocation,
-
       };
     case LOCATIONS_LIST_FULL:
       return {

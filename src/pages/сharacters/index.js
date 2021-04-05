@@ -45,7 +45,7 @@ function mapStateToProps(state) {
     isRequestingCharacterList: state.character.isRequestingCharacterList,
     characterList: state.character.characterList,
     arrayCharacter: state.character.arrayCharacter,
-    characterFullList: state.character.characterFullList
+    // characterFullList: state.character.characterFullList
   };
 }
 

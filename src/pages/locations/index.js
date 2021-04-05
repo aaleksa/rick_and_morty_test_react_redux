@@ -3,9 +3,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
   loadLocationsListAsync,
-  loadLocationsMultipleListAsync
+  loadLocationsMultipleListAsync,
+  loadFullListLocation
 } from '../../actions/locations';
 import LocationsCard from '../locations/LocationsCard';
+import FilterLocation from '../locations/FilterLocation';
+
 
 class Locations extends React.Component {
   constructor(props) {
@@ -16,7 +19,7 @@ class Locations extends React.Component {
   }
   async componentDidMount() {
     await this.props.loadLocationsListAsync('locations');
-    // await this.props.loadFullListLocations('episodes',this.props.arrayEpisodes)
+    await this.props.loadFullListLocation('locations',this.props.arrayLocation)
     await this.props.loadLocationsMultipleListAsync('locations',this.state.arrayCard);
   }
 
@@ -24,7 +27,7 @@ class Locations extends React.Component {
     return (
       <div className='container-locations'>
         <h1>Locations</h1>
-        {/*<FilterEpisodes/>*/}
+        <FilterLocation/>
         <LocationsCard/>
         {/*<PaginationEpisodes/>*/}
       </div>
@@ -38,7 +41,8 @@ class Locations extends React.Component {
  function mapStateToProps (state){
   return {
     locationsList: state.locations.locationsList,
-    characterList: state.character.characterList,
+    // characterList: state.character.characterList,
+    arrayLocation: state.locations.arrayLocation,
 
   }
  }
@@ -46,7 +50,8 @@ class Locations extends React.Component {
    bindActionCreators (
      {
        loadLocationsListAsync,
-       loadLocationsMultipleListAsync
+       loadLocationsMultipleListAsync,
+       loadFullListLocation
    },
    dispatch
  )
