@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './index.css';
+import PopupFullCard from '../../components/PopupFullCard.js'
+
 
 class CharacterCard extends React.Component {
   constructor(props) {
@@ -16,9 +18,9 @@ class CharacterCard extends React.Component {
   showFullCard(event) {
 
     const id = event.target.parentElement.id;
-    const newPressedCardValue = this.props.characterList.find((characterList) => {
-      if (id == characterList.id) {
-        return characterList;
+    const newPressedCardValue = this.props.characterList.find((characterItem) => {
+      if (id == characterItem.id) {
+        return characterItem;
       }
       return undefined;
     });
@@ -35,6 +37,7 @@ class CharacterCard extends React.Component {
       });
 
     }
+    console.log('pressedCard', this.state.pressedCard)
   }
 
   hideFullCard() {
@@ -51,58 +54,30 @@ class CharacterCard extends React.Component {
               id={characterList.id}
           >
             <h2>{characterList.name}</h2>
-            <img className={'item-card-img'} src={characterList.image}/>
+            <img alt={'Нет картинки'} className={'item-card-img'} src={characterList.image}/>
             <span>{characterList.species}</span>
           </li>
         ))}
       </ul>
     )
-    const popupFullCard = (
-      <div className={'popup-character-card'}>
-        <div>
-          <button onClick={this.hideFullCard}>X</button>
-        </div>
-        {
-          this.state.pressedCard && (
-              <>
-                <h2>{this.state.pressedCard.name}</h2>
-                <img className={'item-card-img'}
-                     src={this.state.pressedCard.image}/>
-                <span>{this.state.pressedCard.species}</span>
-                <span>{this.state.pressedCard.status}</span>
-                {
-                  this.state.pressedCard.location &&
-                  <div className={'item-card-location'}>
-                    <span>{this.state.pressedCard.location.name}</span>
-                    <a href={this.state.pressedCard.location.url}/>
-                  </div>
-                }
-                {
-                  this.state.pressedCard.origin &&
-                  <div className={'item-card-origin'}>
-                    <span>{this.state.pressedCard.origin.name}</span>
-                    <a href={this.state.pressedCard.origin.url}/>
-                  </div>
-                }
-              </>
-            )
-        }
-
-
-      </div>
-    )
-
     return (
-        (
-          <div>
-            <div className={'container-popup-character-card'}>
-              {this.state.showPopupFullCard && popupFullCard}
+      (
+        <div>
+          <div className={'container-popup-character-card'}>
+            {this.state.showPopupFullCard &&
+            <div>
+              <button onClick={this.hideFullCard}>X</button>
             </div>
-            <div className={'container-main'}>
-              {listItems}
-            </div>
+            }
+            {this.state.showPopupFullCard &&
+            <PopupFullCard pressedCard={this.state.pressedCard}/>
+            }
           </div>
-        )
+          <div className={'container-main'}>
+            {listItems}
+          </div>
+        </div>
+      )
     );
   }
 };

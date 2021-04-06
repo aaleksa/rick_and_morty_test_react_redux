@@ -1,0 +1,23 @@
+.container-main {
+  display: flex;
+  flex-direction: row;
+
+}
+.container-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.item-card {
+  background-color: cornsilk;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  width: 20%;
+  justify-content: center;
+  align-items: center;
+  /*padding: 10px;*/
+}
+.item-card-img {
+  max-width: 100%;
+}
