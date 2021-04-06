@@ -2,7 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './episodes.css';
 
+function isCharacterForEachEpisode(resident) {
+  let url = resident;
+  let str = url.substring(url.lastIndexOf("/") + 1);
+  return str;
+}
 class EpisodesCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      apiEndpointsAvatar: 'https://rickandmortyapi.com/api/character/avatar/',
+    };
+  }
   render() {
     const listItem = (
       <table className={'container-table'}>
@@ -15,24 +26,25 @@ class EpisodesCard extends React.Component {
         </tr>
         </thead>
         <tbody className={'list-item-episodes'}>
-        {this.props.episodesList && this.props.episodesList.map((episodesList) => (
-          <tr key={episodesList.id} id={episodesList.id}>
-            <th className={'item-card-episodes '}>{episodesList.name}</th>
-            <th className={'item-card-episodes '}>{episodesList.air_date}</th>
+        {this.props.episodesList && this.props.episodesList.map((episodesItem) => (
+          <tr key={episodesItem.id} id={episodesItem.id}>
+            <th className={'item-card-episodes '}>{episodesItem.name}</th>
+            <th className={'item-card-episodes '}>{episodesItem.air_date}</th>
             <th className={'item-card-episodes '}>
               <ul>
-                {episodesList.characters && episodesList.characters.map((characters, index) => (
+                {episodesItem.characters && episodesItem.characters.map((character, index) => (
                   <li key={index}
                     className={'list-characters'}>
-                    <a href={characters}
-                     className={'link-character'}>{characters}</a>
+                    <img className={'img-character'}
+                         alt={'Нет картинки'}
+                         src={this.state.apiEndpointsAvatar + '/' + isCharacterForEachEpisode(character) + '.jpeg'}/>
                   </li>
                 ))}
 
               </ul>
             </th>
             <th className={'item-card-episodes '}>
-              <a href={episodesList.url}>{episodesList.url}</a></th>
+              <a href={episodesItem.url}>{episodesItem.url}</a></th>
           </tr>
         ))}
 

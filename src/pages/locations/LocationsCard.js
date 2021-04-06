@@ -39,7 +39,8 @@ class LocationsCard extends React.Component {
                   <div key={index}
                       className={'item-characters'}>
                     <img className={'img-character'}
-                         alt={'Нет картинки'} src={this.state.apiEndpointsAvatar + '/' + isCharacterForEachLocation(resident) + '.jpeg'}/>
+                         alt={'Нет картинки'}
+                         src={this.state.apiEndpointsAvatar + '/' + isCharacterForEachLocation(resident) + '.jpeg'}/>
                   </div>
                 ))}
               </div>
