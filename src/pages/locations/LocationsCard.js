@@ -34,15 +34,15 @@ class LocationsCard extends React.Component {
             <th className={'item-card-locations '}>{locationsItem.name}</th>
             <th className={'item-card-locations '}>{locationsItem.type}</th>
             <th className={'item-card-locations '}>
-              <ul className={'container-img-characters'}>
+              <div className={'container-img-characters'}>
                 {locationsItem.residents && locationsItem.residents.map( (resident, index) => (
-                  <li key={index}
+                  <div key={index}
                       className={'item-characters'}>
                     <img className={'img-character'}
                          alt={'Нет картинки'} src={this.state.apiEndpointsAvatar + '/' + isCharacterForEachLocation(resident) + '.jpeg'}/>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </th>
             <th className={'item-card-locations '}>{locationsItem.dimension}</th>
             <th className={'item-card-locations '}>
