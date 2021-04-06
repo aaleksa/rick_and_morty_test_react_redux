@@ -8,7 +8,7 @@ import App from '../src/App.js';
 import './index.css';
 
 const target = document.querySelector('#root');
-
+// const activePageURL = window.location.href;
 render (
   <Provider store={store}>
     <ConnectedRouter history={history}>

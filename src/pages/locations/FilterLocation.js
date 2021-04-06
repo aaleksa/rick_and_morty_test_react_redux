@@ -8,9 +8,9 @@ class FilterLocation extends React.Component {
   constructor(props) {
     super(props);
     this.state  = {
-      filteredList: [...props.locationsFullList],
-      filteredListType: [...props.typeLocation],
-      filteredListDimension: [...props.arrayDimensions],
+      filteredList: [],
+      filteredListType: [],
+      filteredListDimension: [],
       name: '',
       type: '',
       dimension: '',
@@ -21,6 +21,9 @@ class FilterLocation extends React.Component {
   };
 
   visibleListLocation (event){
+    this.setState({filteredList: [...this.props.locationsFullList]});
+    this.setState({filteredListType: [...this.props.typeLocation]});
+    this.setState({filteredListDimension: [...this.props.arrayDimensions]});
     if(event.target.nextSibling.classList[1] === 'visible-list'){
       event.target.nextSibling.classList.remove('visible-list')
     } else {

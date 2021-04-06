@@ -12,7 +12,7 @@ class FilterEpisodes extends React.Component {
     super(props);
     this.state = {
       name: '',
-      filteredList: [...props.episodesFullList],
+      filteredList: [],
     };
     this.visibleListEpisodes = this.visibleListEpisodes.bind(this);
     this.changeEpisodes = this.changeEpisodes.bind(this);
@@ -21,6 +21,7 @@ class FilterEpisodes extends React.Component {
   }
 
   visibleListEpisodes() {
+    this.setState({filteredList: [...this.props.episodesFullList]})
     let element = document.getElementsByClassName('container-episodes-list');
     if(element[0].classList[1] === 'visible-list'){
       element[0].classList.remove('visible-list')
@@ -31,9 +32,9 @@ class FilterEpisodes extends React.Component {
   changeEpisodes(event) {
     this.setState({name: event.target.value});
     const searchString = event.target.value;
-    this.state.filteredList = this.props.episodesFullList.filter((episode) => {
+    this.setState({filteredList: this.props.episodesFullList.filter((episode) => {
       return episode.name.includes(searchString);
-    });
+    })});
   }
   selectEpisodes(event){
     this.setState({name: event.target.textContent});

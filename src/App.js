@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Link} from 'react-router-dom';
+import {Route, Link, Redirect} from 'react-router-dom';
 
 import './App.css';
 
@@ -11,60 +11,109 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 
-const App = () => {
 
-  function isActivePage(event) {
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.isActivePage = this.isActivePage.bind(this)
+  }
+
+  isActivePage(event) {
     const activeElement = document.getElementsByClassName('active-page');
-    console.log('activeElement',activeElement)
     const element = event.target;
-
-    if(activeElement.length > 0){
+    if (activeElement.length > 0) {
       activeElement[0].classList.remove('active-page');
       element.classList.add('active-page')
-
-    }else {
+    } else {
       element.classList.add('active-page')
     }
   }
 
-  return (
-    <div className={'main-container'}>
-      <div className={'navigator-container'}>
-        <Link className={'item-navigation active-page'}
-              onClick={isActivePage}
-              to="/">Characters</Link>
-        <Link className={'item-navigation'}
-              onClick={isActivePage}
-              to="/episodes">Episodes</Link>
-        <Link className={'item-navigation'}
-              onClick={isActivePage}
-              to="/locations">Locations</Link>
-        <Link className={'item-navigation'}
-              onClick={isActivePage}
-              to="/myWatchList">MyWatchList</Link>
-      </div>
-      <div className={'component-container'}>
-        <Route exact path="/" component={Characters}/>
-        <Route exact path="/episodes" component={Episodes}/>
-        <Route exact path="/locations" component={Locations}/>
-        <Route exact path="/myWatchList" component={MyWatchList}/>
-      </div>
-    </div>
-  )
-};
+  render() {
+    const activePageURL = window.location.href;
+    const url = '/' + activePageURL.substring(activePageURL.lastIndexOf("/") + 1);
+    return (
 
-function mapStateToProps(state) {
+      <div className={'main-container'}>
+        <div className={'navigator-container'}>
+          { url === "/" &&
+          <Link className={'item-navigation active-page'}
+                onClick={this.isActivePage}
+                to="/">Characters</Link>
+          }
+          { url !== "/" &&
+          <Link className={'item-navigation'}
+                onClick={this.isActivePage}
+                to="/">Characters</Link>
+          }
+
+          {url === "/episodes" &&
+          <Link className={'item-navigation active-page'}
+                onClick={this.isActivePage}
+                to="/episodes">Episodes</Link>
+          }
+          {url !== "/episodes" &&
+          <Link className={'item-navigation'}
+                onClick={this.isActivePage}
+                to="/episodes">Episodes</Link>
+          }
+
+          {url === "/locations" &&
+          <Link className={'item-navigation active-page'}
+                onClick={this.isActivePage}
+                to="/locations">Locations</Link>
+          }
+          {url !== "/locations" &&
+          <Link className={'item-navigation'}
+                onClick={this.isActivePage}
+                to="/locations">Locations</Link>
+          }
+
+          {url === "/myWatchList" &&
+          <Link className={'item-navigation active-page'}
+                onClick={this.isActivePage}
+                to="/myWatchList">MyWatchList</Link>
+          }
+          {url !== "/myWatchList" &&
+          <Link className={'item-navigation'}
+                onClick={this.isActivePage}
+                to="/myWatchList">MyWatchList</Link>
+          }
+
+        </div>
+        <div className={'component-container'}>
+          <Route exact path="/" component={Characters}/>
+          <Route path="/episodes" component={Episodes}/>
+          <Route path="/locations" component={Locations}/>
+          <Route path="/myWatchList" component={MyWatchList}/>
+        </div>
+      </div>
+    )
+
+  }
+}
+
+function
+
+mapStateToProps(state) {
   return {};
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {},
-    dispatch
-  );
+const
+  mapDispatchToProps = dispatch =>
+    bindActionCreators(
+      {},
+      dispatch
+    );
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)
+
+(
+  App
+)
+;

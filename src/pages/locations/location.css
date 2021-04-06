@@ -16,9 +16,11 @@
   padding: 20px;
   width: 100%;
 }
+
 .list-item-locations {
   visibility: visible;
 }
+
 .item-card-locations {
   padding: 15px;
   border: 1px solid #ddd;
@@ -33,7 +35,7 @@
   min-height: 200px;
   overflow: scroll;
   justify-content: center;
-
+  padding-top: 25px;
 }
 
 .item-characters {
@@ -50,7 +52,7 @@
 }
 
 .img-character:hover {
-  transform: scale(2) ;
+  transform: scale(2);
   /*position: relative;*/
   /*z-index: 1000000;*/
 }
