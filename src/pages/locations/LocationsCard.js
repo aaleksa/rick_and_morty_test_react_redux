@@ -111,7 +111,6 @@ function mapStateToProps(state) {
   return {
     characterSingle: state.character.characterSingle,
     locationsList: state.locations.locationsList,
-    arrayCharacterForEachLocation: state.locations.arrayCharacterForEachLocation
 
   };
 }

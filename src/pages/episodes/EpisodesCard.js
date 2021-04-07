@@ -110,7 +110,6 @@ class EpisodesCard extends React.Component {
 function mapStateToProps(state) {
   return {
     characterSingle: state.character.characterSingle,
-    characterFullList: state.character.characterFullList,
     episodesList: state.episodes.episodesList,
   };
 }

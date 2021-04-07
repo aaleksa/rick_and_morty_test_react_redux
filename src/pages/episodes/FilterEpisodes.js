@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import {loadEpisodesListAsyncFilter} from '../../actions/episodes';
 import {loadEpisodesMultipleListAsync} from '../../actions/episodes';
-// import episodes from '../../reducers/episodes';
 
 
 class FilterEpisodes extends React.Component {
