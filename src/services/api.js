@@ -5,6 +5,25 @@ const apiEndpoints = {
   "episodes": "https://rickandmortyapi.com/api/episode",
 };
 
+async function getSingle(nameList,id) {
+  console.log('nameList,id',nameList,id)
+  let json = {};
+  const url = `${apiEndpoints[nameList]}/${id}`;
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
+    }
+  });
+  if (response.ok) {
+    json = await response.json();
+  } else {
+    alert("Ошибка HTTP: " + response.status);
+  }
+  return json;
+}
+
+
 async function getList(nameList) {
   let json = {};
   const url = `${apiEndpoints[nameList]}`;
@@ -81,6 +100,7 @@ async function getListFilter(nameList,filter) {
 }
 
 export default {
+  getSingle,
   getList,
   getListFilter,
   getListSelectedPage,

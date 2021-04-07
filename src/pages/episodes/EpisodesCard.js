@@ -2,6 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './episodes.css';
 import PopupFullCard from '../../components/PopupFullCard';
+import {
+  loadSingleCharacter,
+} from '../../actions/character';
+import {bindActionCreators} from 'redux';
+
 
 function isCharacterForEachEpisode(resident) {
   let url = resident;
@@ -20,23 +25,18 @@ class EpisodesCard extends React.Component {
     this.hideFullCard = this.hideFullCard.bind(this);
   }
 
-  showFullCardEpisode(event) {
-    const idClickElement = event.target.parentElement.id;
-    let newPressedCardValue = this.props.characterFullList.find((characterItem) => {
-      if (idClickElement == characterItem.id) {
-        return characterItem;
-      }
-      return undefined;
-    });
+  async showFullCardEpisode(event) {
+    const idElement = event.target.parentElement.id;
+    await this.props.loadSingleCharacter('characters',idElement);
 
-    if (newPressedCardValue === undefined) {
+    if (this.props.characterSingle === undefined) {
       this.setState({
         showPopupFullCardForEpisode: {debug_undefined: 'debug un'},
         showPopupFullCard: true,
       });
     } else {
       this.setState({
-        showPopupFullCardForEpisode: newPressedCardValue,
+        showPopupFullCardForEpisode: this.props.characterSingle,
         showPopupFullCard: true,
       });
 
@@ -109,11 +109,20 @@ class EpisodesCard extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    characterSingle: state.character.characterSingle,
     characterFullList: state.character.characterFullList,
     episodesList: state.episodes.episodesList,
   };
 }
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      loadSingleCharacter,
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(EpisodesCard);

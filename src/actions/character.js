@@ -1,6 +1,5 @@
 import api from '../services/api';
-import {EPISODES_INFO_REQUESTED, EPISODES_LIST_FULL} from './episodes';
-
+export  const CHARACTER_SINGLE = 'counter/CHARACTER_SINGLE'
 export const CHARACTER_LIST_REQUESTED = 'counter/CHARACTER_LIST_REQUESTED'
 export const CHARACTER_LIST = 'counter/CHARACTER_LIST'
 export const CHARACTER_LIST_REQUESTED_FILTER = 'counter/CHARACTER_LIST_REQUESTED_FILTER'
@@ -10,6 +9,19 @@ export const CHARACTER_INFO = 'counter/CHARACTER_INFO'
 export const  CHARACTER_LIST_FULL = 'counter/ CHARACTER_LIST_FULL'
 
 
+export const loadSingleCharacter = (nameList,id) => {
+
+  return async (dispatch) => {
+    dispatch({
+      type: CHARACTER_INFO_REQUESTED,
+    })
+    const list = await api.getSingle(nameList,id);
+    dispatch({
+      type: CHARACTER_SINGLE,
+      payload: list,
+    })
+  };
+};
 
 export const loadCharacterListAsync = (nameList) => {
 

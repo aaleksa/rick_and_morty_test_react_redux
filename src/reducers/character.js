@@ -3,10 +3,12 @@ import {
   CHARACTER_LIST,
   CHARACTER_LIST_FULL,
   CHARACTER_LIST_FILTER,
-  CHARACTER_LIST_REQUESTED
+  CHARACTER_LIST_REQUESTED,
+  CHARACTER_SINGLE
 } from '../actions/character';
 
 const initialStateCharacter = {
+  characterSingle: {},
   characterList: [],
   arrayPages: [],
   isRequestingCharacterList: false,
@@ -18,11 +20,15 @@ const initialStateCharacter = {
 
 export default (state = initialStateCharacter, action) => {
   switch (action.type) {
-
     case CHARACTER_LIST_REQUESTED:
       return {
         ...state,
         isRequestingCharacterList: true,
+      };
+    case CHARACTER_SINGLE:
+      return {
+        ...state,
+        characterSingle: action.payload,
       };
     case CHARACTER_LIST_FULL:
       return {

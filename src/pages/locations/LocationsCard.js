@@ -2,6 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './location.css';
 import PopupFullCard from '../../components/PopupFullCard';
+import {bindActionCreators} from 'redux';
+import {
+  loadSingleCharacter,
+} from '../../actions/character';
 
 function isCharacterForEachLocation(resident) {
   let url = resident;
@@ -21,23 +25,17 @@ class LocationsCard extends React.Component {
     this.hideFullCard = this.hideFullCard.bind(this);
   }
 
-  showFullCardLocation(event) {
-    let idElements = event.target.parentElement.id;
-    let newPressedCardValue = this.props.characterFullList.find((characterItem) => {
-      if (idElements == characterItem.id) {
-        return characterItem;
-      }
-      return undefined;
-    });
-
-    if (newPressedCardValue === undefined) {
+  async showFullCardLocation(event) {
+    let idElement = event.target.parentElement.id;
+    await this.props.loadSingleCharacter('characters',idElement);
+    if (this.props.characterSingle === undefined) {
       this.setState({
         showPopupFullCardForLocation: {debug_undefined: 'debug un'},
         showPopupFullCard: true,
       });
     } else {
       this.setState({
-        showPopupFullCardForLocation: newPressedCardValue,
+        showPopupFullCardForLocation: this.props.characterSingle,
         showPopupFullCard: true,
       });
 
@@ -111,13 +109,21 @@ class LocationsCard extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    characterFullList: state.character.characterFullList,
+    characterSingle: state.character.characterSingle,
     locationsList: state.locations.locationsList,
     arrayCharacterForEachLocation: state.locations.arrayCharacterForEachLocation
 
   };
 }
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      loadSingleCharacter,
+    },
+    dispatch
+  );
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(LocationsCard);
