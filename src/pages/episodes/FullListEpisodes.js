@@ -6,7 +6,7 @@ import {loadEpisodesListAsyncFilter} from '../../actions/episodes';
 import {loadEpisodesMultipleListAsync} from '../../actions/episodes';
 
 
-class FilterEpisodes extends React.Component {
+class FullListEpisodes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,6 +38,8 @@ class FilterEpisodes extends React.Component {
   selectEpisodes(event){
     this.setState({name: event.target.textContent});
     let filtersString = 'name=' + event.target.textContent;
+    this.props.updateData(this.state.name);
+
     this.props.loadEpisodesListAsyncFilter('episodes',filtersString);
 
   }
@@ -81,12 +83,11 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       loadEpisodesListAsyncFilter,
-      loadEpisodesMultipleListAsync
-
+      loadEpisodesMultipleListAsync,
     },
     dispatch
   );
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(FilterEpisodes);
+)(FullListEpisodes);

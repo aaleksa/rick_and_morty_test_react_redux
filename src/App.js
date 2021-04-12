@@ -70,23 +70,23 @@ class App extends React.Component {
                 to="/locations">Locations</Link>
           }
 
-          {/*{url === "/myWatchList" &&*/}
-          {/*<Link className={'item-navigation active-page'}*/}
-          {/*      onClick={this.isActivePage}*/}
-          {/*      to="/myWatchList">MyWatchList</Link>*/}
-          {/*}*/}
-          {/*{url !== "/myWatchList" &&*/}
-          {/*<Link className={'item-navigation'}*/}
-          {/*      onClick={this.isActivePage}*/}
-          {/*      to="/myWatchList">MyWatchList</Link>*/}
-          {/*}*/}
+          {url === "/myWatchList" &&
+          <Link className={'item-navigation active-page'}
+                onClick={this.isActivePage}
+                to="/myWatchList">MyWatchList</Link>
+          }
+          {url !== "/myWatchList" &&
+          <Link className={'item-navigation'}
+                onClick={this.isActivePage}
+                to="/myWatchList">MyWatchList</Link>
+          }
 
         </div>
         <div className={'component-container'}>
           <Route exact path="/" component={Characters}/>
           <Route path="/episodes" component={Episodes}/>
           <Route path="/locations" component={Locations}/>
-          {/*<Route path="/myWatchList" component={MyWatchList}/>*/}
+          <Route path="/myWatchList" component={MyWatchList}/>
         </div>
       </div>
     )

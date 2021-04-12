@@ -8,7 +8,7 @@ import {
 import {connect} from 'react-redux';
 import EpisodesCard from './EpisodesCard';
 import PaginationEpisodes from './PaginationEpisodes';
-import FilterEpisodes from './FilterEpisodes';
+import FullListEpisodes from './FullListEpisodes';
 
 
 class Episodes extends React.Component {
@@ -28,7 +28,7 @@ class Episodes extends React.Component {
     return (
       <div className='container-episodes'>
         <h1>Episodes</h1>
-        <FilterEpisodes/>
+        <FullListEpisodes/>
         <EpisodesCard/>
         <PaginationEpisodes/>
       </div>
