@@ -17,6 +17,10 @@ class Episodes extends React.Component {
     this.state = {
       arrayCard: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25],
     };
+    this.updateData = this.updateData.bind(this)
+  }
+  updateData = (value) => {
+    this.setState({ name: value })
   }
   async componentDidMount() {
     await this.props.loadEpisodesListAsync('episodes');
@@ -28,7 +32,7 @@ class Episodes extends React.Component {
     return (
       <div className='container-episodes'>
         <h1>Episodes</h1>
-        <FullListEpisodes/>
+        <FullListEpisodes updateData={this.updateData}/>
         <EpisodesCard/>
         <PaginationEpisodes/>
       </div>

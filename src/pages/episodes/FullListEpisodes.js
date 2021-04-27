@@ -28,19 +28,19 @@ class FullListEpisodes extends React.Component {
       element[0].classList.add('visible-list')
     }
   };
-  changeEpisodes(event) {
+  async changeEpisodes(event) {
     this.setState({name: event.target.value});
     const searchString = event.target.value;
+    await this.props.updateData(this.state.name);
     this.setState({filteredList: this.props.episodesFullList.filter((episode) => {
       return episode.name.includes(searchString);
     })});
   }
-  selectEpisodes(event){
-    this.setState({name: event.target.textContent});
-    let filtersString = 'name=' + event.target.textContent;
-    this.props.updateData(this.state.name);
-
-    this.props.loadEpisodesListAsyncFilter('episodes',filtersString);
+  async selectEpisodes(event){
+    this.setState({name: event.target.innerHTML});
+    let filtersString = 'name=' + event.target.innerHTML;
+    await this.props.loadEpisodesListAsyncFilter('episodes',filtersString);
+    await this.props.updateData(this.state.name);
 
   }
 
